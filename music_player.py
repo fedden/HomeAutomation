@@ -15,7 +15,7 @@ class MusicPlayer():
     def __init__(self):
         self.program = 'tizonia'
         self.process = None
-        self.play = False
+        self.play_stream = False
 
     def kill_any_current_process(self):
         if self.process is not None:
@@ -23,7 +23,7 @@ class MusicPlayer():
             time.sleep(0.8)
             self.process.terminate()
             self.process.kill()
-            self.play = False
+            self.play_stream = False
             self.process = None
 
     def start_audio_process(self, program_args):
@@ -32,7 +32,7 @@ class MusicPlayer():
                                         stdin=subprocess.PIPE,
                                         stdout=subprocess.DEVNULL,
                                         stderr=subprocess.STDOUT)
-        self.play = True
+        self.play_stream = True
 
     def communicate_with_process(self, input_text):
         input_bytes = to_bytes(input_text)
@@ -44,14 +44,14 @@ class MusicPlayer():
         self.communicate_with_process('n')
 
     def pause(self):
-        if self.play:
+        if self.play_stream:
             self.communicate_with_process(' ')
-            self.play = False
+            self.play_stream = False
 
     def play(self):
-        if not self.play:
+        if not self.play_stream:
             self.communicate_with_process(' ')
-            self.play = True
+            self.play_stream = True
 
     def previous(self):
         self.communicate_with_process('p')
