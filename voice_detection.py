@@ -63,8 +63,9 @@ def audio_file_to_text(audio_file_path):
     with sr.AudioFile(audio_file_path) as source:
         audio = recogniser.record(source)
 
+    text_result = ""
     try:
-        return recogniser.recognize_google(audio)
+        text_result = recogniser.recognize_google(audio)
 
     except sr.UnknownValueError:
         print("Google speech recognition did not understand this audio file.")
@@ -74,7 +75,7 @@ def audio_file_to_text(audio_file_path):
 
     os.remove(audio_file_path)
 
-    return ""
+    return text_result
 
 
 def text_to_intent(client_access_token, session_id, query_str):
@@ -146,7 +147,7 @@ session_id = str(uuid.uuid4())
 project_id = 'albus-d8845'
 language_code = 'en-GB'
 
-hotword_sensitivity = 0.26
+hotword_sensitivity = 0.4
 
 models = [
     'albus_ella.pmdl',

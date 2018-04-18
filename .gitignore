@@ -1,3 +1,8 @@
+# Prevent random wav files and anything compiled 
+# or arch specific.
 *.pyc
 *.so
 *.wav
+
+# Allow audio files in resources.
+!resources/*.wav
