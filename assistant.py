@@ -30,8 +30,14 @@ def bytes_to_dict(message_bytes):
 
 class Albus(BaseProgram):
 
-    def __init__(self, config):
-        BaseProgram.__init__(self)
+    def __init__(self, node):
+        BaseProgram.__init__(self, node)
+        self.node_name = None
+        self.node_location = None
+        self.available_input_devices = None
+        self.available_output_devices = None
+
+    def apply_config(self, config):
         self.node_name = config['node_name']
         self.node_location = config['node_location']
         self.available_input_devices = config['available_input_devices']

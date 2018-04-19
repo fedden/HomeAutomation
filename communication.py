@@ -30,14 +30,14 @@ if __name__ == "__main__":
 
     config = bedroom_config
 
-    assistant = Albus(config)
-
     links = [UDPLink('en0', 2010)]
 
     node = Node(links,
                 config['node_name'],
                 Filters=[],
-                Program=assistant)
+                Program=Albus)
+
+    node.program.apply_config(config)
 
     [link.start() for link in links]
     node.start()
